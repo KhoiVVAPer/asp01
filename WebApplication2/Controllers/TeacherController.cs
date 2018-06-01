@@ -127,5 +127,25 @@ namespace WebApplication2.Controllers
 
             return httpActionResult;
         }
+        [System.Web.Http.HttpGet]
+        public IHttpActionResult GetListClass(int id)
+        {
+            IHttpActionResult httpActionResult;
+            var gv = _db.Teacher.FirstOrDefault(x => x.Id == id);
+
+            if (gv == null)
+            {
+                ErrorModel errors = new ErrorModel();
+                errors.Add("Không tìm thấy Giáo viên này");
+
+                httpActionResult = Ok(errors);
+            }
+            else
+            {
+                httpActionResult = Ok(new GetListClassModel(gv.DanhSachLopDay));
+            }
+
+            return httpActionResult;
+        }
     }
 }

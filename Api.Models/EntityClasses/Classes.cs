@@ -13,6 +13,9 @@ namespace Api.Models
         public string Malop { get; set; }
         public string Tenlop { get; set; }
         public virtual ICollection<Student> DanhSachSV { get; set; }
+        [InversePropertyAttribute ("DanhSachLopDay")]
+        public virtual ICollection<Teacher> DanhSachGV { get; set; }
+        [InversePropertyAttribute("DanhSachLopChuNhiem")]
         public virtual Teacher GiaoVienChuNhiem { get; set; }
     }
 }

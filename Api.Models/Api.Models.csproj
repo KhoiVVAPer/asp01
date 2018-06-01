@@ -49,7 +49,6 @@
   <ItemGroup>
     <Compile Include="ApiDBContext.cs" />
     <Compile Include="EntityClasses\Classes.cs" />
-    <Compile Include="EntityClasses\HoatDongGiangDay.cs" />
     <Compile Include="IEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="EntityClasses\Student.cs" />

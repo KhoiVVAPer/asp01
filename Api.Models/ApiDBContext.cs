@@ -27,7 +27,6 @@ namespace Api.Models
 		public DbSet<Classes> Class { get; set; }
 		public DbSet<Student> Students { get; set; }
 		public DbSet<Teacher> Teacher { get; set; }
-        public DbSet<HoatDongGiangDay> HDGD { get; set; }
 		public override int SaveChanges()
 		{
 			//

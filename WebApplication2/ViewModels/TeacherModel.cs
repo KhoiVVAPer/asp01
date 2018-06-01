@@ -28,4 +28,16 @@ namespace WebApplication2.ViewModels
     {
         public int Id { get; set; }
     }
+
+    public class GetListClassModel
+    {
+        public List<Classes> DSLop { get; set; }
+        public GetListClassModel(ICollection<Classes> DSLop)
+        {
+            foreach(Classes lop in DSLop)
+            {
+                DSLop.Add(lop);
+            }
+        }
+    }
 }

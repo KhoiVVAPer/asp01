@@ -21,3 +21,15 @@ C:\Users\anhkh\source\repos\WebApplication2\Api.Models\obj\Debug\Api.Models.cspr
 C:\Users\anhkh\source\repos\WebApplication2\Api.Models\obj\Debug\Api.Models.csproj.CopyComplete
 C:\Users\anhkh\source\repos\WebApplication2\Api.Models\obj\Debug\Api.Models.dll
 C:\Users\anhkh\source\repos\WebApplication2\Api.Models\obj\Debug\Api.Models.pdb
+C:\Users\anhkh\OneDrive\Desktop\test tai ve\asp01\Api.Models\bin\Debug\Api.Models.dll.config
+C:\Users\anhkh\OneDrive\Desktop\test tai ve\asp01\Api.Models\bin\Debug\Api.Models.dll
+C:\Users\anhkh\OneDrive\Desktop\test tai ve\asp01\Api.Models\bin\Debug\Api.Models.pdb
+C:\Users\anhkh\OneDrive\Desktop\test tai ve\asp01\Api.Models\bin\Debug\EntityFramework.dll
+C:\Users\anhkh\OneDrive\Desktop\test tai ve\asp01\Api.Models\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\anhkh\OneDrive\Desktop\test tai ve\asp01\Api.Models\bin\Debug\EntityFramework.xml
+C:\Users\anhkh\OneDrive\Desktop\test tai ve\asp01\Api.Models\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\anhkh\OneDrive\Desktop\test tai ve\asp01\Api.Models\obj\Debug\Api.Models.csprojAssemblyReference.cache
+C:\Users\anhkh\OneDrive\Desktop\test tai ve\asp01\Api.Models\obj\Debug\Api.Models.csproj.CoreCompileInputs.cache
+C:\Users\anhkh\OneDrive\Desktop\test tai ve\asp01\Api.Models\obj\Debug\Api.Models.csproj.CopyComplete
+C:\Users\anhkh\OneDrive\Desktop\test tai ve\asp01\Api.Models\obj\Debug\Api.Models.dll
+C:\Users\anhkh\OneDrive\Desktop\test tai ve\asp01\Api.Models\obj\Debug\Api.Models.pdb

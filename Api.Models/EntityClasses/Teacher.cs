@@ -14,5 +14,6 @@ namespace Api.Models
         public string TenGV { get; set; }
         public virtual ICollection<Classes> DanhSachLopChuNhiem { get; set; }
         
+        public virtual ICollection<Classes> DanhSachLopDay { get; set; }
     }
 }
