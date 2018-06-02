@@ -128,7 +128,7 @@ namespace WebApplication2.Controllers
             return httpActionResult;
         }
         [System.Web.Http.HttpGet]
-        public IHttpActionResult GetListClass(int id)
+        public IHttpActionResult GetListClassCN(int id)
         {
             IHttpActionResult httpActionResult;
             var gv = _db.Teacher.FirstOrDefault(x => x.Id == id);
@@ -142,7 +142,7 @@ namespace WebApplication2.Controllers
             }
             else
             {
-                httpActionResult = Ok(new GetListClassModel(gv.DanhSachLopDay));
+                httpActionResult = Ok(new GetListClassModel(gv.DanhSachLopChuNhiem));
             }
 
             return httpActionResult;

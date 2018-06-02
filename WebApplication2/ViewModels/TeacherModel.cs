@@ -29,14 +29,27 @@ namespace WebApplication2.ViewModels
         public int Id { get; set; }
     }
 
+    public class ViewClassModel
+    {
+        public int id { get; set; }
+        public string MaLop { get; set; }
+        public string TenLop { get; set; }
+    }
+
     public class GetListClassModel
     {
-        public List<Classes> DSLop { get; set; }
-        public GetListClassModel(ICollection<Classes> DSLop)
+        public List<ViewClassModel> DanhSachLopChuNhiem { get; set; }
+        public GetListClassModel(ICollection<Classes> DanhSachLop)
         {
-            foreach(Classes lop in DSLop)
+            this.DanhSachLopChuNhiem = new List<ViewClassModel>();
+            foreach(Classes lop in DanhSachLop)
             {
-                DSLop.Add(lop);
+                this.DanhSachLopChuNhiem.Add(new ViewClassModel()
+                {
+                    id = lop.Id,
+                    MaLop = lop.Malop,
+                    TenLop = lop.Tenlop
+                });
             }
         }
     }
