@@ -33,3 +33,15 @@ C:\Users\anhkh\OneDrive\Desktop\test tai ve\asp01\Api.Models\obj\Debug\Api.Model
 C:\Users\anhkh\OneDrive\Desktop\test tai ve\asp01\Api.Models\obj\Debug\Api.Models.csproj.CopyComplete
 C:\Users\anhkh\OneDrive\Desktop\test tai ve\asp01\Api.Models\obj\Debug\Api.Models.dll
 C:\Users\anhkh\OneDrive\Desktop\test tai ve\asp01\Api.Models\obj\Debug\Api.Models.pdb
+D:\asp\trainning\asp01\Api.Models\bin\Debug\Api.Models.dll.config
+D:\asp\trainning\asp01\Api.Models\bin\Debug\Api.Models.dll
+D:\asp\trainning\asp01\Api.Models\bin\Debug\Api.Models.pdb
+D:\asp\trainning\asp01\Api.Models\bin\Debug\EntityFramework.dll
+D:\asp\trainning\asp01\Api.Models\bin\Debug\EntityFramework.SqlServer.dll
+D:\asp\trainning\asp01\Api.Models\bin\Debug\EntityFramework.xml
+D:\asp\trainning\asp01\Api.Models\bin\Debug\EntityFramework.SqlServer.xml
+D:\asp\trainning\asp01\Api.Models\obj\Debug\Api.Models.csprojAssemblyReference.cache
+D:\asp\trainning\asp01\Api.Models\obj\Debug\Api.Models.csproj.CoreCompileInputs.cache
+D:\asp\trainning\asp01\Api.Models\obj\Debug\Api.Models.csproj.CopyComplete
+D:\asp\trainning\asp01\Api.Models\obj\Debug\Api.Models.dll
+D:\asp\trainning\asp01\Api.Models\obj\Debug\Api.Models.pdb

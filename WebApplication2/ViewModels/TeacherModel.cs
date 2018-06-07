@@ -36,15 +36,32 @@ namespace WebApplication2.ViewModels
         public string TenLop { get; set; }
     }
 
-    public class GetListClassModel
+    public class GetListClassCNModel
     {
-        public List<ViewClassModel> DanhSachLopChuNhiem { get; set; }
-        public GetListClassModel(ICollection<Classes> DanhSachLop)
+        public ICollection<ViewClassModel> DanhSachLopChuNhiem { get; set; }
+        public GetListClassCNModel(ICollection<Classes> DanhSachLop)
         {
             this.DanhSachLopChuNhiem = new List<ViewClassModel>();
             foreach(Classes lop in DanhSachLop)
             {
                 this.DanhSachLopChuNhiem.Add(new ViewClassModel()
+                {
+                    id = lop.Id,
+                    MaLop = lop.Malop,
+                    TenLop = lop.Tenlop
+                });
+            }
+        }
+    }
+    public class GetListClassModel
+    {
+        public ICollection<ViewClassModel> DanhSachLopDay { get; set; }
+        public GetListClassModel(ICollection<Classes> DanhSachLop)
+        {
+            this.DanhSachLopDay = new List<ViewClassModel>();
+            foreach (Classes lop in DanhSachLop)
+            {
+                this.DanhSachLopDay.Add(new ViewClassModel()
                 {
                     id = lop.Id,
                     MaLop = lop.Malop,

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
+using WebApplication2.Infrastructure;
 using WebApplication2.ViewModels;
 
 namespace WebApplication2.Controllers
@@ -19,9 +20,50 @@ namespace WebApplication2.Controllers
             this._db = new ApiDBContext();
         }
 
-        /* 
-         *  Hàm tạo Giáo viên
-        */
+
+        /**
+         * @api (Post) Tạo một giáo viên mới
+         * @apiName CreateTeacher
+         * @apigroup Teacher
+         * @apiPermission none
+         * 
+         * @apiParam {string} Malop Mã của lớp mới
+         * @apiParam {string} Tenlop Tên của lớp mới
+         * 
+         * @apiParamExample {json} Request-Example:
+         * {
+         *      "Malop" : "abc123",
+         *      "Tenlop" : "Công nghệ thông tin"
+         * }
+         * 
+         * @apiSuccess {string} Malop Mã của lớp vừa tạo
+         * @apiSuccess {string} Tenlop Tên của lớp vừa tạo
+         * @apiSuccess {int} Id Id của lớp mới
+         * 
+         * @apiSuccessExample Success-Response:
+         *     HTTP/1.1 200 OK
+         * {
+         *      "Id" : "1",
+         *      "Malop" : "bcd123",
+         *      "Tenlop" : "Công nghệ thông tin 2"
+         * }
+         * 
+         * @apiError BadRequest {string[]} Errors Mảng các lỗi
+         * 
+         * @apiErrorExample Error-Response:
+         *     HTTP/1.1 400 Bad Request
+         * {
+         *      "Errors" : [
+         *          "Mã lớp là trường bắt buộc",
+         *          "Tên lớp là trường bắt buộc"
+         *      ]
+         * }
+         * 
+         * 
+         * 
+         * 
+         */
+
         [System.Web.Http.HttpPost]
         public IHttpActionResult Create(CreateTeacherModel model)
         {
@@ -53,14 +95,55 @@ namespace WebApplication2.Controllers
             }
             else
             {
-                httpActionResult = Ok(errors);
+                httpActionResult = new ErrorActionResult(Request, System.Net.HttpStatusCode.BadRequest, errors);
             }
 
             return httpActionResult;
         }
-        /* 
-        *   Hàm cập nhập Giáo viên
-        */
+
+
+        /**
+         * @api (Post) Cập nhập thông tin Giáo Viên
+         * @apiName EditTeacher
+         * @apigroup Teacher
+         * @apiPermission none
+         * 
+         * @apiParam {string} Malop Mã của lớp mới
+         * @apiParam {string} Tenlop Tên của lớp mới
+         * 
+         * @apiParamExample {json} Request-Example:
+         * {
+         *      "Malop" : "abc123",
+         *      "Tenlop" : "Công nghệ thông tin"
+         * }
+         * 
+         * @apiSuccess {string} Malop Mã của lớp vừa tạo
+         * @apiSuccess {string} Tenlop Tên của lớp vừa tạo
+         * @apiSuccess {int} Id Id của lớp mới
+         * 
+         * @apiSuccessExample Success-Response:
+         *     HTTP/1.1 200 OK
+         * {
+         *      "Id" : "1",
+         *      "Malop" : "bcd123",
+         *      "Tenlop" : "Công nghệ thông tin 2"
+         * }
+         * 
+         * @apiError BadRequest {string[]} Errors Mảng các lỗi
+         * 
+         * @apiErrorExample Error-Response:
+         *     HTTP/1.1 400 Bad Request
+         * {
+         *      "Errors" : [
+         *          "Mã lớp là trường bắt buộc",
+         *          "Tên lớp là trường bắt buộc"
+         *      ]
+         * }
+         * 
+         * 
+         * 
+         * 
+         */
         [System.Web.Http.HttpPut]
         public IHttpActionResult Update(UpdateTeacherModel model)
         {
@@ -72,8 +155,7 @@ namespace WebApplication2.Controllers
             if (gv == null)
             {
                 errors.Add("Không tìm thấy giáo viên này");
-
-                httpActionResult = Ok(errors);
+                httpActionResult = new ErrorActionResult(Request, System.Net.HttpStatusCode.NotFound, errors);
             }
             else
             {
@@ -88,10 +170,57 @@ namespace WebApplication2.Controllers
 
             return httpActionResult;
         }
+        /**
+                 * @api (Get) Lấy danh sách giáo viên
+                 * @apiName GetAllTeacher
+                 * @apigroup Teacher
+                 * @apiPermission none
+             *
+                 * @apiSuccess {Object[]} DanhSachGiaoVien Danh sách giáo viên 
+                 * 
+                 * @apiSuccessExample Success-Response:
+                 *     HTTP/1.1 200 OK
+                 * [
+                    *   DanhSachGiaoVien
+             *	{
+             *	
+                "MaGV": "GV001",
+             *	
+                "TenGV": "GiaoVien 01",
+             *	
+                "Id": 1
+            
+             *	},
 
-        /* 
-        *   Hàm lấy danh sách Giáo viên
-        */
+             *	{
+             *	
+                "MaGV": "GV002",
+             *	
+                "TenGV": "GiaoVien 02",
+            
+         *	        "Id": 2
+            
+             *	}
+
+             * ]
+                 * 
+                 * @apiError Not Found {string[]} Errors Mảng các lỗi
+                 * 
+                 * @apiErrorExample Error-Response:
+                 *     HTTP/1.1 404 Not Found
+                 * {
+                 *      "Errors" : [
+                 *          "Không tìm thấy giáo viên này"
+                 *      ]
+                 * }
+                 * 
+                 * 
+                 */
+
+
+
+
+
         [System.Web.Http.HttpGet]
         public IHttpActionResult GetAllTeacher()
         {
@@ -104,9 +233,36 @@ namespace WebApplication2.Controllers
 
             return Ok(listStudent);
         }
-        /* 
-        *   Hàm lấy thông tin Giáo viên theo ID
-        */
+        /**
+         * @api (Get) Lấy giáo viên theo ID
+         * @apiName GetTeacherById
+         * @apigroup Teacher
+         * @apiPermission none
+	     *
+         * @apiSuccess teacher Danh sách giáo viên 
+         * 
+         * @apiSuccessExample Success-Response:
+         *     HTTP/1.1 200 OK
+         *
+	     * {
+	     *     "MaGV": "GV001",
+         *     "TenGV": "GiaoVien 01",
+         *     "Id": 1
+         * }
+	     *
+         * 
+         * @apiError Not Found {string[]} Errors Mảng các lỗi
+         * 
+         * @apiErrorExample Error-Response:
+         *     HTTP/1.1 404 Not Found
+         * {
+         *      "Errors" : [
+         *          "Không tìm thấy giáo viên này"
+         *      ]
+         * }
+         * 
+         * 
+         */
         [System.Web.Http.HttpGet]
         public IHttpActionResult GetById(int id)
         {
@@ -118,7 +274,7 @@ namespace WebApplication2.Controllers
                 ErrorModel errors = new ErrorModel();
                 errors.Add("Không tìm thấy Giáo viên này");
 
-                httpActionResult = Ok(errors);
+                httpActionResult = new ErrorActionResult(Request, System.Net.HttpStatusCode.NotFound, errors);
             }
             else
             {
@@ -127,6 +283,48 @@ namespace WebApplication2.Controllers
 
             return httpActionResult;
         }
+
+        
+
+
+
+     	 /** @apiName GetListClassCN
+         * @apigroup Teacher
+         * @apiPermission none
+	     *
+         * @apiSuccess {Object[]} teacher Lấy danh sách lớp chủ nhiệm theo ID giáo viên
+         *
+         * @apiSuccessExample Success-Response:
+         * HTTP/1.1 200 OK
+         * {    
+
+         *	"DanhSachLopChuNhiem" : [
+	     *		{	
+         *	        "MaLop" : "CNTT001",	
+         *	        "TenLop": "Công nghệ thông tin",
+         *	        "Id": 1
+	     *		},
+         *		{	
+         *          "MaLop": "KT001",
+         *          "TenLop": "Kế toán",
+         *        	"Id": 2
+         *		}
+         *	 ]
+         * }
+         *
+         * @apiError Not Found {string[]} Errors Mảng các lỗi
+         *
+         * @apiErrorExample Error-Response:
+         * HTTP/1.1 404 Not Found
+         * {
+         *      "Errors" : [
+         *          "Không tìm thấy Giáo viên này"
+         *      ]
+         * }
+         *
+         *
+         */
+
         [System.Web.Http.HttpGet]
         public IHttpActionResult GetListClassCN(int id)
         {
@@ -138,11 +336,74 @@ namespace WebApplication2.Controllers
                 ErrorModel errors = new ErrorModel();
                 errors.Add("Không tìm thấy Giáo viên này");
 
-                httpActionResult = Ok(errors);
+                httpActionResult = new ErrorActionResult(Request, System.Net.HttpStatusCode.NotFound, errors);
             }
             else
             {
-                httpActionResult = Ok(new GetListClassModel(gv.DanhSachLopChuNhiem));
+                httpActionResult = Ok(new GetListClassCNModel(gv.DanhSachLopChuNhiem));
+            }
+
+            return httpActionResult;
+        }
+
+
+        
+
+
+
+     	/** @apiName GetListClass
+         * @apigroup Teacher
+         * @apiPermission none
+	     *
+         * @apiSuccess {Object[]} teacher Lấy danh sách lớp dạy theo ID giáo viên
+         *
+         * @apiSuccessExample Success-Response:
+         * HTTP/1.1 200 OK
+         * {    
+         *
+         *	"DanhSachLopDay": [
+	     *		{
+         *   	    "MaLop" : "CNTT001",
+         *	        "TenLop": "Công nghệ thông tin",
+         *	        "Id": 1
+	     *		},
+         *		{	
+         *	        "MaLop": "KT001",	
+         *	        "TenLop": "Kế toán",
+         *     	    "Id": 2
+         *		}
+         *	]
+         * }
+         *
+         * @apiError Not Found {string[]} Errors Mảng các lỗi
+         *
+         * @apiErrorExample Error-Response:
+         * HTTP/1.1 404 Not Found
+         * {
+         *      "Errors" : [
+         *          "Không tìm thấy giáo viên này"
+         *      ]
+         * }
+         *
+         *
+         */
+
+        [System.Web.Http.HttpGet]
+        public IHttpActionResult GetListClass(int id)
+        {
+            IHttpActionResult httpActionResult;
+            var gv = _db.Teacher.FirstOrDefault(x => x.Id == id);
+
+            if (gv == null)
+            {
+                ErrorModel errors = new ErrorModel();
+                errors.Add("Không tìm thấy Giáo viên này");
+
+                httpActionResult = new ErrorActionResult(Request, System.Net.HttpStatusCode.NotFound, errors);
+            }
+            else
+            {
+                httpActionResult = Ok(new GetListClassModel(gv.DanhSachLopDay));
             }
 
             return httpActionResult;

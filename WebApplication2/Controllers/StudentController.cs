@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
+using WebApplication2.Infrastructure;
 using WebApplication2.ViewModels;
 
 namespace WebApplication2.Controllers
@@ -18,6 +19,69 @@ namespace WebApplication2.Controllers
         {
             this._db = new ApiDBContext();
         }
+
+        /**
+         * @api (Post) Tạo một Sinh viên mới
+         * @apiName CreateStudent
+         * @apigroup Student
+         * @apiPermission none
+         * 
+         * @apiParam {string} MSSV Mã số sinh viên của Sinh viên
+         * @apiParam {string} HoTen Họ và tên của Sinh viên
+         * @apiParam {datetime} NgaySinh Ngày sinh của Sinh viên
+         * @apiParam {string} DiaChi Địa chỉ của Sinh viên
+         * @apiParam {int} LOP_ID ID của lớp Sinh viên học
+         * 
+         * 
+         * @apiParamExample {json} Request-Example:
+         * {
+         *      "MSSV" : "abc123",
+         *      "HoTen" : "ABC",
+         *      "NgaySinh" : "1997/2/15",
+         *      "DiaChi" : "23/asdas",
+         *      "LOP_ID" : 1
+         * }
+         * 
+         * @apiSuccess {string} MSSV Mã số sinh viên của Sinh viên
+         * @apiSuccess {string} HoTen Họ và tên của Sinh viên
+         * @apiSuccess {datetime} NgaySinh Ngày sinh của Sinh viên
+         * @apiSuccess {string} DiaChi Địa chỉ của Sinh viên
+         * @apiSuccess {int} LOP_ID ID của lớp Sinh viên học
+         * 
+         * @apiSuccessExample Success-Response:
+         *     HTTP/1.1 200 OK
+         *  {
+         *      "MSSV" : "abc123",
+         *      "HoTen" : "ABC",
+         *      "NgaySinh" : "1997/2/15",
+         *      "DiaChi" : "23/asdas",
+         *      "LOP_ID" : 1,
+         *      "ID" : 1
+         * }
+         * 
+         * @apiError BadRequest {string} Errors Mảng các lỗi
+         * 
+         * @apiErrorExample Error-Response:
+         *     HTTP/1.1 400 Bad Request
+         * {
+         *      "Errors" : [
+         *          "MSSV là trường bắt buộc"
+         *      ]
+         * }
+         * 
+         * @apiError NotFound {string} Errors Mảng các lỗi
+         * 
+         * @apiErrorExample Error-Response:
+         *     HTTP/1.1 404 Not Found
+         * {
+         *      "Errors" : [
+         *          "ID Lớp trống hoặc không tồn tại"
+         *      ]
+         * }
+         * 
+         * 
+         * 
+         */
 
         [System.Web.Http.HttpPost]
         public IHttpActionResult Create(CreateStudentModel model)
@@ -53,12 +117,78 @@ namespace WebApplication2.Controllers
             }
             else
             {
-                httpActionResult = Ok(errors);
+                httpActionResult = new ErrorActionResult(Request, System.Net.HttpStatusCode.BadRequest, errors);
             }
 
             return httpActionResult;
         }
 
+        /**
+         * @api (Put) Cập nhập thông tin Sinh viên
+         * @apiName EditStudent
+         * @apigroup Student
+         * @apiPermission none
+         * 
+         * @apiParam {string} MSSV Mã số sinh viên (mới) của Sinh viên
+         * @apiParam {string} HoTen Họ và tên (mới) của Sinh viên
+         * @apiParam {datetime} NgaySinh Ngày sinh (mới) của Sinh viên
+         * @apiParam {string} DiaChi Địa chỉ (mới) của Sinh viên
+         * @apiParam {int} LOP_ID ID của lớp (mới) Sinh viên học
+         * @apiParam {int} ID ID của Sinh viên cần sữa
+         * 
+         * @apiParamExample {json} Request-Example:
+         * {
+         *      "MSSV" : "abc123",
+         *      "HoTen" : "ABC",
+         *      "NgaySinh" : "1997/2/15",
+         *      "DiaChi" : "23/asdas",
+         *      "LOP_ID" : 1,
+         *      "ID" : 1
+         * }
+         * 
+         * 
+         * 
+         * @apiSuccess {string} MSSV Mã số sinh viên (mới) của Sinh viên
+         * @apiSuccess {string} HoTen Họ và tên (mới) của Sinh viên
+         * @apiSuccess {datetime} NgaySinh Ngày sinh (mới) của Sinh viên
+         * @apiSuccess {string} DiaChi Địa chỉ (mới) của Sinh viên
+         * @apiSuccess {int} LOP_ID ID của lớp (mới) Sinh viên học
+         * 
+         * @apiSuccessExample Success-Response:
+         *     HTTP/1.1 200 OK
+         *  {
+         *      "MSSV" : "abc123",
+         *      "HoTen" : "ABC",
+         *      "NgaySinh" : "1997/2/15",
+         *      "DiaChi" : "23/asdas",
+         *      "LOP_ID" : 1,
+         *      "ID" : 1
+         * }
+         * 
+         * @apiError BadRequest {string} Errors Mảng các lỗi
+         * 
+         * @apiErrorExample Error-Response:
+         *     HTTP/1.1 400 Bad Request
+         * {
+         *      "Errors" : [
+         *          "MSSV là trường bắt buộc"
+         *      ]
+         * }
+         * 
+         * @apiError NotFound {string} Errors Mảng các lỗi
+         * 
+         * @apiErrorExample Error-Response:
+         *     HTTP/1.1 404 Not Found
+         * {
+         *      "Errors" : [
+         *          "ID Sinh viên không tồn tại",
+         *          "ID Lớp trống hoặc không tồn tại"
+         *      ]
+         * }
+         * 
+         * 
+         * 
+         */
         [System.Web.Http.HttpPut]
         public IHttpActionResult Update(UpdateStudentModel model)
         {
@@ -71,7 +201,7 @@ namespace WebApplication2.Controllers
             {
                 errors.Add("Không tìm thấy Sinh viên");
 
-                httpActionResult = Ok(errors);
+                httpActionResult = new ErrorActionResult(Request, System.Net.HttpStatusCode.NotFound, errors);
             }
             else
             {
@@ -89,7 +219,38 @@ namespace WebApplication2.Controllers
 
             return httpActionResult;
         }
-
+        /**
+         * @api (Get) Lấy danh sách Sinh viên
+         * @apiName GetAllStudents
+         * @apigroup Student
+         * @apiPermission none
+         * 
+         * 
+         * @apiSuccess {Student[]} Danh sách Sinh viên
+         * @apiSuccessExample Success-Response:
+         *     HTTP/1.1 200 OK
+         * [
+         *      {
+         *          "MSSV" : "abc123",
+         *          "HoTen" : "ABC",
+         *          "NgaySinh" : "1997/2/15",
+         *          "DiaChi" : "23/asdas",
+         *          "LOP_ID" : 1,
+         *          "ID" : 1
+         *      },
+         *      {
+         *          "MSSV" : "abc126",
+         *          "HoTen" : "XYZ",
+         *          "NgaySinh" : "1997/6/15",
+         *          "DiaChi" : "213/asdas",
+         *          "LOP_ID" : 1,
+         *          "ID" : 2
+         *      }
+         * ]
+         * 
+         * 
+         * 
+         */
         [System.Web.Http.HttpGet]
         public IHttpActionResult GetAll()
         {
@@ -106,6 +267,35 @@ namespace WebApplication2.Controllers
             return Ok(listStudent);
         }
 
+        /**
+         * @api (Get) Tìm Sinh viên theo ID
+         * @apiName GetStudentById
+         * @apigroup Student
+         * @apiPermission none
+         * 
+         * @apiSuccess {string} Thông tin sinh viên
+         * @apiSuccessExample Success-Response:
+         *     HTTP/1.1 200 OK
+         * {
+         *      "MSSV" : "abc123",
+         *      "HoTen" : "ABC",
+         *      "NgaySinh" : "1997/2/15",
+         *      "DiaChi" : "23/asdas",
+         *      "LOP_ID" : 1,
+         *      "ID" : 1
+         * }
+         * 
+         * 
+         * @apiError NotFound {string[]} Errors Mảng các lỗi
+         * 
+         * @apiErrorExample Error-Response:
+         *     HTTP/1.1 404 Not Found
+         * {
+         *      "Errors" : [
+         *          "Không tìm thấy sinh viên "
+         *      ]
+         * } 
+         */
         [System.Web.Http.HttpGet]
         public IHttpActionResult GetById(int id)
         {
@@ -117,7 +307,7 @@ namespace WebApplication2.Controllers
                 ErrorModel errors = new ErrorModel();
                 errors.Add("Không tìm thấy sinh viên này");
 
-                httpActionResult = Ok(errors);
+                httpActionResult = new ErrorActionResult(Request, System.Net.HttpStatusCode.NotFound, errors);
             }
             else
             {
